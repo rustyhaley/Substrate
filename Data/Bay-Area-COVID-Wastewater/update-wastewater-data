@@ -1,0 +1,49 @@
+#!/usr/bin/env bun
+
+/**
+ * Update California Wastewater Data
+ *
+ * Fetches the latest wastewater surveillance data from CDPH
+ * for SARS-CoV-2, Influenza, and RSV
+ */
+
+import { writeFileSync } from 'fs';
+import { join } from 'path';
+
+const DATA_URL = 'https://data.chhs.ca.gov/dataset/a6ca879a-6014-4b72-9ea6-07ef8b87ae83/resource/2742b824-3736-4292-90a9-7fad98e94c06/download/wastewatersurveillancecalifornia.csv';
+const CSV_PATH = join(__dirname, 'California-Wastewater-Surveillance-Latest.csv');
+
+async function fetchLatestData(): Promise<string> {
+  console.log('📡 Fetching latest California wastewater data from CDPH Open Data Portal...\n');
+
+  const response = await fetch(DATA_URL);
+  if (!response.ok) {
+    throw new Error(`Failed to fetch data: ${response.statusText}`);
+  }
+
+  return await response.text();
+}
+
+try {
+  const csvData = await fetchLatestData();
+
+  // Save the raw CSV
+  writeFileSync(CSV_PATH, csvData);
+
+  const lines = csvData.trim().split('\n');
+  const recordCount = lines.length - 1; // minus header
+
+  console.log('✅ Data updated successfully\n');
+  console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+  console.log('📊 CALIFORNIA WASTEWATER DATA UPDATE');
+  console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n');
+  console.log(`📈 Total records: ${recordCount.toLocaleString()}`);
+  console.log(`📁 Saved to: California-Wastewater-Surveillance-Latest.csv\n`);
+  console.log('🦠 Pathogens tracked: SARS-CoV-2, Influenza, RSV, Mpox, Norovirus\n');
+  console.log('ℹ️  Source: California Health and Human Services Open Data Portal');
+  console.log('ℹ️  Updated: Daily\n');
+
+} catch (error) {
+  console.error('❌ Error updating wastewater data:', error);
+  process.exit(1);
+}

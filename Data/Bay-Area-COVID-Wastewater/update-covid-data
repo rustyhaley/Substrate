@@ -1,0 +1,152 @@
+#!/usr/bin/env bun
+
+/**
+ * Update COVID-19 Wastewater Data
+ *
+ * Fetches the latest California statewide wastewater data from CDPH
+ * and updates the local CSV dataset.
+ */
+
+import { writeFileSync, readFileSync } from 'fs';
+import { join } from 'path';
+
+const DATA_URL = 'https://data.chhs.ca.gov/dataset/1184f641-313f-47ee-b126-9e8c42699be5/resource/726752d3-afe6-4733-99bd-ffb9f400348c/download/wastewater.csv';
+const CSV_PATH = join(__dirname, 'COVID-Wastewater-California-Statewide-2022-2025.csv');
+const UPDATES_PATH = join(__dirname, 'UPDATES.md');
+
+interface RawWastewaterData {
+  season: string;
+  week_ending_date: string;
+  sars_cov2_log10_copies_ml: string;
+}
+
+async function fetchLatestData(): Promise<string> {
+  console.log('📡 Fetching latest COVID wastewater data from CDPH...\n');
+
+  const response = await fetch(DATA_URL);
+  if (!response.ok) {
+    throw new Error(`Failed to fetch data: ${response.statusText}`);
+  }
+
+  return await response.text();
+}
+
+function parseCSV(csvContent: string): RawWastewaterData[] {
+  const lines = csvContent.trim().split('\n');
+  const headers = lines[0].toLowerCase().split(',');
+
+  return lines.slice(1).map(line => {
+    const values = line.split(',');
+    return {
+      season: values[0],
+      week_ending_date: values[1],
+      sars_cov2_log10_copies_ml: values[2]
+    };
+  }).filter(row => row.week_ending_date && row.sars_cov2_log10_copies_ml);
+}
+
+function formatDate(dateStr: string): string {
+  const date = new Date(dateStr);
+  return date.toLocaleDateString('en-US', {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric'
+  });
+}
+
+function convertToISO(dateStr: string): string {
+  // Convert MM/DD/YYYY to YYYY-MM-DD
+  const parts = dateStr.split('/');
+  if (parts.length === 3) {
+    const [month, day, year] = parts;
+    return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
+  }
+  return dateStr;
+}
+
+function processAndSaveData(rawData: RawWastewaterData[]): void {
+  // Sort by date (oldest to newest for the file)
+  rawData.sort((a, b) => new Date(a.week_ending_date).getTime() - new Date(b.week_ending_date).getTime());
+
+  // Format CSV with proper headers
+  const csvLines = [
+    'season,week_ending_date,sars_cov2_log10_copies_ml,data_source,region,notes'
+  ];
+
+  for (const row of rawData) {
+    const isoDate = convertToISO(row.week_ending_date);
+    const roundedValue = parseFloat(row.sars_cov2_log10_copies_ml).toFixed(2);
+    csvLines.push(
+      `${row.season},${isoDate},${roundedValue},CDPH California Wastewater Surveillance,California Statewide,Log10 viral gene copies/mL`
+    );
+  }
+
+  writeFileSync(CSV_PATH, csvLines.join('\n') + '\n');
+  console.log(`✅ Updated dataset: ${rawData.length} records saved\n`);
+}
+
+function updateChangelog(latestRecord: RawWastewaterData, recordCount: number): void {
+  const now = new Date();
+  const updateDate = now.toISOString().split('T')[0];
+  const latestDate = convertToISO(latestRecord.week_ending_date);
+  const latestValue = parseFloat(latestRecord.sars_cov2_log10_copies_ml).toFixed(2);
+
+  const changelogEntry = `
+## ${updateDate} - Automated Data Update
+
+**Data Period**: 2022-07-09 to ${latestDate}
+**Source**: CDPH California Wastewater Surveillance
+**URL**: ${DATA_URL}
+
+### Changes
+- Updated dataset with latest wastewater measurements
+- Total records: ${recordCount}
+
+### Latest Value
+- **Week Ending**: ${formatDate(latestDate)}
+- **SARS-CoV-2**: ${latestValue} log10 copies/mL
+
+---
+`;
+
+  try {
+    const currentChangelog = readFileSync(UPDATES_PATH, 'utf-8');
+    const futureUpdatesMarker = '## Future Updates';
+    const parts = currentChangelog.split(futureUpdatesMarker);
+
+    if (parts.length === 2) {
+      const updatedChangelog = parts[0] + changelogEntry + futureUpdatesMarker + parts[1];
+      writeFileSync(UPDATES_PATH, updatedChangelog);
+      console.log('📝 Updated UPDATES.md changelog\n');
+    }
+  } catch (error) {
+    console.log('⚠️  Could not update changelog:', error);
+  }
+}
+
+try {
+  const rawCSV = await fetchLatestData();
+  const data = parseCSV(rawCSV);
+
+  if (data.length === 0) {
+    console.error('❌ No valid data found in source CSV');
+    process.exit(1);
+  }
+
+  // Get the latest record (after sorting)
+  const latestRecord = data[data.length - 1];
+
+  processAndSaveData(data);
+  updateChangelog(latestRecord, data.length);
+
+  console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+  console.log('✅ COVID DATA UPDATE COMPLETE');
+  console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n');
+  console.log(`📅 Latest data point: ${formatDate(convertToISO(latestRecord.week_ending_date))}`);
+  console.log(`📊 Latest viral load: ${parseFloat(latestRecord.sars_cov2_log10_copies_ml).toFixed(2)} log10 copies/mL`);
+  console.log(`📈 Total records: ${data.length}\n`);
+
+} catch (error) {
+  console.error('❌ Error updating COVID data:', error);
+  process.exit(1);
+}

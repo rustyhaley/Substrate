@@ -1,0 +1,382 @@
+#!/usr/bin/env bun
+
+/**
+ * Get California Wastewater Data
+ *
+ * Analyzes trends and provides risk assessment for going out in public
+ */
+
+import { readFileSync } from 'fs';
+import { join } from 'path';
+
+const CSV_PATH = join(__dirname, 'Data/Bay-Area-COVID-Wastewater/California-Wastewater-Surveillance-Latest.csv');
+
+interface WastewaterRecord {
+  sample_collect_date: string;
+  pcr_target: string;
+  pcr_target_avg_conc: string;
+  reporting_jurisdiction: string;
+  county_names: string;
+  pcr_target_units: string;
+}
+
+function parseCSV(csvContent: string): WastewaterRecord[] {
+  const lines = csvContent.trim().split('\n');
+  const headers = lines[0].split(',');
+
+  const dateIdx = headers.indexOf('sample_collect_date');
+  const targetIdx = headers.indexOf('pcr_target');
+  const concIdx = headers.indexOf('pcr_target_avg_conc');
+  const jurisdIdx = headers.indexOf('reporting_jurisdiction');
+  const countyIdx = headers.indexOf('county_names');
+  const unitsIdx = headers.indexOf('pcr_target_units');
+
+  const records: WastewaterRecord[] = [];
+
+  for (let i = 1; i < lines.length; i++) {
+    const line = lines[i];
+    if (!line.trim()) continue;
+
+    const values = line.split(',');
+
+    const record = {
+      sample_collect_date: values[dateIdx] || '',
+      pcr_target: values[targetIdx] || '',
+      pcr_target_avg_conc: values[concIdx] || '',
+      reporting_jurisdiction: values[jurisdIdx] || '',
+      county_names: values[countyIdx] || '',
+      pcr_target_units: values[unitsIdx] || ''
+    };
+
+    if (record.reporting_jurisdiction === 'CA' &&
+        record.pcr_target &&
+        record.pcr_target_avg_conc &&
+        !isNaN(parseFloat(record.pcr_target_avg_conc))) {
+      records.push(record);
+    }
+  }
+
+  return records;
+}
+
+function formatDate(dateStr: string): string {
+  const date = new Date(dateStr);
+  return date.toLocaleDateString('en-US', {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric'
+  });
+}
+
+function analyzePathogenTrends(records: WastewaterRecord[], pathogenName: string) {
+  const now = new Date();
+  const oneYearAgo = new Date(now.getTime() - 365 * 24 * 60 * 60 * 1000);
+  const threeMonthsAgo = new Date(now.getTime() - 90 * 24 * 60 * 60 * 1000);
+  const oneMonthAgo = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
+  const twoWeeksAgo = new Date(now.getTime() - 14 * 24 * 60 * 60 * 1000);
+
+  const relevantRecords = records.filter(r =>
+    r.pcr_target.toLowerCase() === pathogenName.toLowerCase()
+  );
+
+  const dataByPeriod = {
+    recent: [] as number[],
+    twoWeeks: [] as number[],
+    oneMonth: [] as number[],
+    threeMonths: [] as number[],
+    year: [] as number[],
+    latestDate: ''
+  };
+
+  for (const record of relevantRecords) {
+    const date = new Date(record.sample_collect_date);
+    const value = parseFloat(record.pcr_target_avg_conc);
+
+    if (date >= oneYearAgo) {
+      dataByPeriod.year.push(value);
+
+      if (date >= threeMonthsAgo) {
+        dataByPeriod.threeMonths.push(value);
+
+        if (date >= oneMonthAgo) {
+          dataByPeriod.oneMonth.push(value);
+
+          if (date >= twoWeeksAgo) {
+            dataByPeriod.twoWeeks.push(value);
+            dataByPeriod.recent.push(value);
+          }
+        }
+      }
+
+      if (!dataByPeriod.latestDate || record.sample_collect_date > dataByPeriod.latestDate) {
+        dataByPeriod.latestDate = record.sample_collect_date;
+      }
+    }
+  }
+
+  const avg = (arr: number[]) => arr.length ? arr.reduce((a, b) => a + b, 0) / arr.length : 0;
+  const percentChange = (current: number, previous: number) =>
+    previous ? ((current - previous) / previous * 100) : 0;
+
+  return {
+    current: avg(dataByPeriod.recent),
+    twoWeeksAvg: avg(dataByPeriod.twoWeeks),
+    oneMonthAvg: avg(dataByPeriod.oneMonth),
+    threeMonthsAvg: avg(dataByPeriod.threeMonths),
+    yearAvg: avg(dataByPeriod.year),
+    yearMin: Math.min(...dataByPeriod.year),
+    yearMax: Math.max(...dataByPeriod.year),
+    latestDate: dataByPeriod.latestDate,
+    trend2wk: percentChange(avg(dataByPeriod.recent), avg(dataByPeriod.twoWeeks)),
+    trend1mo: percentChange(avg(dataByPeriod.recent), avg(dataByPeriod.oneMonth)),
+    sampleCount: dataByPeriod.recent.length
+  };
+}
+
+function generateYearGraph(records: WastewaterRecord[], pathogenName: string, title: string): string {
+  const now = new Date();
+  const oneYearAgo = new Date(now.getTime() - 365 * 24 * 60 * 60 * 1000);
+
+  // Group data by month
+  const monthlyData: { [key: string]: number[] } = {};
+
+  for (const record of records) {
+    if (record.pcr_target.toLowerCase() !== pathogenName.toLowerCase()) continue;
+
+    const date = new Date(record.sample_collect_date);
+    if (date < oneYearAgo) continue;
+
+    const monthKey = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
+    const value = parseFloat(record.pcr_target_avg_conc);
+
+    if (!monthlyData[monthKey]) {
+      monthlyData[monthKey] = [];
+    }
+    monthlyData[monthKey].push(value);
+  }
+
+  // Calculate monthly averages
+  const months: { label: string; value: number }[] = [];
+  const sortedMonths = Object.keys(monthlyData).sort();
+
+  for (const month of sortedMonths) {
+    const avg = monthlyData[month].reduce((a, b) => a + b, 0) / monthlyData[month].length;
+    const [year, monthNum] = month.split('-');
+    const date = new Date(parseInt(year), parseInt(monthNum) - 1, 1);
+    const label = date.toLocaleDateString('en-US', { month: 'short', year: '2-digit' });
+    months.push({ label, value: avg });
+  }
+
+  if (months.length === 0) {
+    return '   No data available for graphing\n';
+  }
+
+  // Find max value for scaling
+  const maxValue = Math.max(...months.map(m => m.value));
+  const graphWidth = 50;
+
+  let graph = `\n   ${title}\n\n`;
+
+  // Generate bars with trend arrows
+  for (let i = 0; i < months.length; i++) {
+    const month = months[i];
+    const barLength = maxValue > 0 ? Math.round((month.value / maxValue) * graphWidth) : 0;
+    const bar = '█'.repeat(barLength);
+    const valueStr = month.value >= 1000 ? `${(month.value / 1000).toFixed(1)}k` : month.value.toFixed(0);
+
+    // Calculate trend arrow
+    let arrow = ' ';
+    if (i > 0) {
+      const prevValue = months[i - 1].value;
+      const change = ((month.value - prevValue) / prevValue) * 100;
+      if (change > 10) {
+        arrow = '⬆️';
+      } else if (change < -10) {
+        arrow = '⬇️';
+      } else {
+        arrow = '➡️';
+      }
+    }
+
+    graph += `   ${month.label} │${bar} ${valueStr} ${arrow}\n`;
+  }
+
+  return graph + '\n';
+}
+
+function getRiskLevel(covidData: any, rsvData: any, fluData: any) {
+  // Risk scoring based on relative levels
+  let riskScore = 0;
+  let factors: string[] = [];
+
+  // COVID risk
+  if (covidData.current > 0) {
+    const covidPercentile = (covidData.current - covidData.yearMin) / (covidData.yearMax - covidData.yearMin);
+    if (covidPercentile > 0.7) {
+      riskScore += 3;
+      factors.push('COVID levels HIGH (top 30% of year)');
+    } else if (covidPercentile > 0.4) {
+      riskScore += 2;
+      factors.push('COVID levels MODERATE');
+    } else {
+      riskScore += 1;
+      factors.push('COVID levels LOW');
+    }
+
+    if (covidData.trend2wk > 20) {
+      riskScore += 2;
+      factors.push('COVID rapidly increasing');
+    } else if (covidData.trend2wk > 0) {
+      riskScore += 1;
+      factors.push('COVID slowly increasing');
+    }
+  }
+
+  // RSV risk
+  if (rsvData.current > 0) {
+    const rsvPercentile = (rsvData.current - rsvData.yearMin) / (rsvData.yearMax - rsvData.yearMin);
+    if (rsvPercentile > 0.7) {
+      riskScore += 2;
+      factors.push('RSV levels HIGH');
+    } else if (rsvPercentile > 0.4) {
+      riskScore += 1;
+      factors.push('RSV levels MODERATE');
+    }
+  }
+
+  // Flu risk
+  if (fluData.current > 0) {
+    const fluPercentile = (fluData.current - fluData.yearMin) / (fluData.yearMax - fluData.yearMin);
+    if (fluPercentile > 0.7) {
+      riskScore += 2;
+      factors.push('FLU levels HIGH');
+    } else if (fluPercentile > 0.4) {
+      riskScore += 1;
+      factors.push('FLU levels MODERATE');
+    }
+  }
+
+  let assessment = '';
+  let emoji = '';
+  let recommendation = '';
+
+  if (riskScore <= 3) {
+    assessment = 'LOW RISK';
+    emoji = '🟢';
+    recommendation = 'Generally safe to be in public. Standard precautions sufficient.';
+  } else if (riskScore <= 6) {
+    assessment = 'MODERATE RISK';
+    emoji = '🟡';
+    recommendation = 'Exercise caution in crowded indoor spaces. Consider masking in high-traffic areas.';
+  } else if (riskScore <= 9) {
+    assessment = 'HIGH RISK';
+    emoji = '🟠';
+    recommendation = 'Significant viral circulation. Recommend masking indoors and avoiding crowded spaces.';
+  } else {
+    assessment = 'VERY HIGH RISK';
+    emoji = '🔴';
+    recommendation = 'Multiple pathogens at elevated levels. Strong recommendation to mask and minimize public exposure.';
+  }
+
+  return { assessment, emoji, recommendation, factors, riskScore };
+}
+
+try {
+  console.log('\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+  console.log('🦠 CALIFORNIA WASTEWATER SURVEILLANCE');
+  console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n');
+
+  const csvContent = readFileSync(CSV_PATH, 'utf-8');
+  const records = parseCSV(csvContent);
+
+  const covidData = analyzePathogenTrends(records, 'sars-cov-2');
+  const rsvData = analyzePathogenTrends(records, 'rsv');
+  const fluData = analyzePathogenTrends(records, 'fluav'); // Influenza A
+
+  console.log('📅 DATA STATUS\n');
+  console.log(`📊 Latest data: ${formatDate(covidData.latestDate || rsvData.latestDate)}`);
+  console.log(`📈 Analysis period: Past 12 months`);
+  console.log(`🔬 Total samples: ${records.length.toLocaleString()}\n`);
+
+  console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n');
+
+  // COVID Analysis
+  if (covidData.sampleCount > 0) {
+    console.log('🦠 SARS-CoV-2 (COVID-19)\n');
+    console.log(`   Current Level: ${covidData.current.toFixed(0)} copies/g`);
+    console.log(`   12-Month Range: ${covidData.yearMin.toFixed(0)} - ${covidData.yearMax.toFixed(0)}`);
+    console.log(`   12-Month Average: ${covidData.yearAvg.toFixed(0)}\n`);
+
+    const trend2wk = covidData.trend2wk > 0 ? '⬆️' : covidData.trend2wk < 0 ? '⬇️' : '➡️';
+    console.log(`   2-Week Trend: ${trend2wk} ${Math.abs(covidData.trend2wk).toFixed(1)}%`);
+
+    const trend1mo = covidData.trend1mo > 0 ? '⬆️' : covidData.trend1mo < 0 ? '⬇️' : '➡️';
+    console.log(`   1-Month Trend: ${trend1mo} ${Math.abs(covidData.trend1mo).toFixed(1)}%\n`);
+
+    // COVID Graph
+    console.log(generateYearGraph(records, 'sars-cov-2', '12-Month Trend (Monthly Averages)'));
+  }
+
+  // Flu Analysis
+  if (fluData.sampleCount > 0) {
+    console.log('🤧 INFLUENZA A\n');
+    console.log(`   Current Level: ${fluData.current.toFixed(0)} copies/g`);
+    console.log(`   12-Month Range: ${fluData.yearMin.toFixed(0)} - ${fluData.yearMax.toFixed(0)}`);
+    console.log(`   12-Month Average: ${fluData.yearAvg.toFixed(0)}\n`);
+
+    const trend2wk = fluData.trend2wk > 0 ? '⬆️' : fluData.trend2wk < 0 ? '⬇️' : '➡️';
+    console.log(`   2-Week Trend: ${trend2wk} ${Math.abs(fluData.trend2wk).toFixed(1)}%`);
+
+    const trend1mo = fluData.trend1mo > 0 ? '⬆️' : fluData.trend1mo < 0 ? '⬇️' : '➡️';
+    console.log(`   1-Month Trend: ${trend1mo} ${Math.abs(fluData.trend1mo).toFixed(1)}%\n`);
+
+    // Flu Graph
+    console.log(generateYearGraph(records, 'fluav', '12-Month Trend (Monthly Averages)'));
+  }
+
+  // RSV Analysis
+  if (rsvData.sampleCount > 0) {
+    console.log('🤒 RSV (Respiratory Syncytial Virus)\n');
+    console.log(`   Current Level: ${rsvData.current.toFixed(0)} copies/g`);
+    console.log(`   12-Month Range: ${rsvData.yearMin.toFixed(0)} - ${rsvData.yearMax.toFixed(0)}`);
+    console.log(`   12-Month Average: ${rsvData.yearAvg.toFixed(0)}\n`);
+
+    const trend2wk = rsvData.trend2wk > 0 ? '⬆️' : rsvData.trend2wk < 0 ? '⬇️' : '➡️';
+    console.log(`   2-Week Trend: ${trend2wk} ${Math.abs(rsvData.trend2wk).toFixed(1)}%`);
+
+    const trend1mo = rsvData.trend1mo > 0 ? '⬆️' : rsvData.trend1mo < 0 ? '⬇️' : '➡️';
+    console.log(`   1-Month Trend: ${trend1mo} ${Math.abs(rsvData.trend1mo).toFixed(1)}%\n`);
+
+    // RSV Graph
+    console.log(generateYearGraph(records, 'rsv', '12-Month Trend (Monthly Averages)'));
+  }
+
+  console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n');
+
+  // Risk Assessment
+  const risk = getRiskLevel(covidData, rsvData, fluData);
+
+  console.log('🎯 RISK ASSESSMENT\n');
+  console.log(`${risk.emoji} Overall Risk Level: ${risk.assessment}\n`);
+  console.log('📋 Key Factors:');
+  for (const factor of risk.factors) {
+    console.log(`   • ${factor}`);
+  }
+  console.log();
+  console.log('💡 RECOMMENDATION\n');
+  console.log(`   ${risk.recommendation}\n`);
+
+  console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n');
+  console.log('ℹ️  Source: California Department of Public Health');
+  console.log('ℹ️  Data: CHHS Open Data Portal (Updated Daily)');
+  console.log('ℹ️  Analysis: 12-month trend comparison\n');
+
+} catch (error) {
+  if ((error as NodeJS.ErrnoException).code === 'ENOENT') {
+    console.error('❌ Data file not found. Please run update first:\n');
+    console.error('   ~/Library/Mobile\\ Documents/com~apple~CloudDocs/Projects/Substrate/Data/Bay-Area-COVID-Wastewater/update-wastewater-data\n');
+  } else {
+    console.error('❌ Error reading wastewater data:', error);
+  }
+  process.exit(1);
+}

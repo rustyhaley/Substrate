@@ -1,0 +1,100 @@
+#!/usr/bin/env bun
+
+/**
+ * Scrape Cal-SuWers COVID Dashboard
+ *
+ * Uses Puppeteer to scrape the dynamic CalSuWers dashboard
+ * since it's an R Shiny app that loads data via JavaScript
+ */
+
+import puppeteer from 'puppeteer';
+import { writeFileSync } from 'fs';
+import { join } from 'path';
+
+const DASHBOARD_URL = 'https://skylab.cdph.ca.gov/calwws/';
+const OUTPUT_PATH = join(__dirname, 'latest-dashboard-data.json');
+
+async function scrapeDashboard() {
+  console.log('🌐 Launching browser...\n');
+
+  const browser = await puppeteer.launch({
+    headless: true,
+    args: ['--no-sandbox', '--disable-setuid-sandbox']
+  });
+
+  try {
+    const page = await browser.newPage();
+
+    console.log('📡 Navigating to CalSuWers dashboard...\n');
+    await page.goto(DASHBOARD_URL, {
+      waitUntil: 'networkidle2',
+      timeout: 60000
+    });
+
+    // Wait for Shiny app to load
+    console.log('⏳ Waiting for dashboard data to load...\n');
+    await page.waitForTimeout(5000);
+
+    // Extract data from the page
+    const data = await page.evaluate(() => {
+      // This will need to be customized based on the actual dashboard structure
+      // Look for specific elements that contain the data
+
+      const result: any = {
+        scrapedAt: new Date().toISOString(),
+        url: window.location.href
+      };
+
+      // Try to find the latest update date
+      const updateDateElement = document.querySelector('[data-testid="last-update"]') ||
+                               Array.from(document.querySelectorAll('*')).find(el =>
+                                 el.textContent?.includes('Last update') ||
+                                 el.textContent?.includes('October')
+                               );
+
+      if (updateDateElement) {
+        result.lastUpdate = updateDateElement.textContent?.trim();
+      }
+
+      // Try to find California statewide data
+      const dataElements = document.querySelectorAll('.value, .metric, [class*="data"]');
+      result.elements = Array.from(dataElements).map(el => ({
+        className: el.className,
+        text: el.textContent?.trim()
+      }));
+
+      // Get all text content for analysis
+      result.bodyText = document.body.innerText;
+
+      return result;
+    });
+
+    console.log('✅ Dashboard data extracted\n');
+
+    // Save raw scraped data
+    writeFileSync(OUTPUT_PATH, JSON.stringify(data, null, 2));
+    console.log(`📁 Raw data saved to: ${OUTPUT_PATH}\n`);
+
+    // Print summary
+    console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+    console.log('📊 DASHBOARD SCRAPE COMPLETE');
+    console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n');
+
+    if (data.lastUpdate) {
+      console.log(`📅 Last Update: ${data.lastUpdate}`);
+    }
+    console.log(`📁 Data file: ${OUTPUT_PATH}\n`);
+    console.log('⚠️  This is a raw scrape - manual parsing may be needed\n');
+
+  } catch (error) {
+    console.error('❌ Error scraping dashboard:', error);
+    throw error;
+  } finally {
+    await browser.close();
+  }
+}
+
+scrapeDashboard().catch(error => {
+  console.error('Failed to scrape dashboard:', error);
+  process.exit(1);
+});

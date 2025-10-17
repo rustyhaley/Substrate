@@ -1,0 +1,121 @@
+#!/usr/bin/env bun
+
+/**
+ * Bay Area COVID-19 Wastewater Status Command
+ *
+ * Analyzes the Substrate COVID wastewater dataset to report:
+ * - Current viral load level
+ * - Risk assessment
+ * - Trend direction (ascending/descending/stable)
+ * - Recent trend analysis
+ */
+
+import { readFileSync } from 'fs';
+import { join } from 'path';
+
+const DATASET_PATH = join(__dirname, 'Data/Bay-Area-COVID-Wastewater/COVID-Wastewater-California-Statewide-2022-2025.csv');
+
+interface WastewaterData {
+  season: string;
+  week_ending_date: string;
+  sars_cov2_log10_copies_ml: number;
+  data_source: string;
+  region: string;
+  notes: string;
+}
+
+function parseCSV(csvContent: string): WastewaterData[] {
+  const lines = csvContent.trim().split('\n');
+  const headers = lines[0].split(',');
+
+  return lines.slice(1).map(line => {
+    const values = line.split(',');
+    return {
+      season: values[0],
+      week_ending_date: values[1],
+      sars_cov2_log10_copies_ml: parseFloat(values[2]),
+      data_source: values[3],
+      region: values[4],
+      notes: values[5] || ''
+    };
+  });
+}
+
+function getRiskLevel(value: number): { level: string; color: string } {
+  // Risk thresholds based on log10 viral copies/mL
+  if (value >= 10) return { level: 'VERY HIGH', color: '🔴' };
+  if (value >= 5) return { level: 'HIGH', color: '🟠' };
+  if (value >= 3) return { level: 'MODERATE', color: '🟡' };
+  if (value >= 2) return { level: 'LOW', color: '🟢' };
+  return { level: 'MINIMAL', color: '🔵' };
+}
+
+function getTrend(current: number, previous: number, twoWeeksAgo: number): string {
+  const recentChange = current - previous;
+  const weeklyChange = previous - twoWeeksAgo;
+
+  // Check if consistently moving in one direction
+  if (recentChange > 0.3 && weeklyChange > 0.3) return 'RAPIDLY ASCENDING ⬆️⬆️';
+  if (recentChange > 0.1) return 'ASCENDING ⬆️';
+  if (recentChange < -0.3 && weeklyChange < -0.3) return 'RAPIDLY DESCENDING ⬇️⬇️';
+  if (recentChange < -0.1) return 'DESCENDING ⬇️';
+  return 'STABLE ➡️';
+}
+
+function formatDate(dateStr: string): string {
+  const date = new Date(dateStr);
+  return date.toLocaleDateString('en-US', {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric'
+  });
+}
+
+try {
+  const csvContent = readFileSync(DATASET_PATH, 'utf-8');
+  const data = parseCSV(csvContent);
+
+  // Sort by date (most recent first)
+  data.sort((a, b) => new Date(b.week_ending_date).getTime() - new Date(a.week_ending_date).getTime());
+
+  const latest = data[0];
+  const oneWeekAgo = data[1];
+  const twoWeeksAgo = data[2];
+  const fourWeeksAgo = data[4];
+
+  const risk = getRiskLevel(latest.sars_cov2_log10_copies_ml);
+  const trend = getTrend(latest.sars_cov2_log10_copies_ml, oneWeekAgo.sars_cov2_log10_copies_ml, twoWeeksAgo.sars_cov2_log10_copies_ml);
+
+  const weeklyChange = ((latest.sars_cov2_log10_copies_ml - oneWeekAgo.sars_cov2_log10_copies_ml) / oneWeekAgo.sars_cov2_log10_copies_ml * 100).toFixed(1);
+  const monthlyChange = ((latest.sars_cov2_log10_copies_ml - fourWeeksAgo.sars_cov2_log10_copies_ml) / fourWeeksAgo.sars_cov2_log10_copies_ml * 100).toFixed(1);
+
+  console.log('\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+  console.log('🦠 BAY AREA COVID-19 WASTEWATER STATUS');
+  console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n');
+
+  console.log(`📅 Latest Data: ${formatDate(latest.week_ending_date)}`);
+  console.log(`📊 Viral Load: ${latest.sars_cov2_log10_copies_ml} log10 copies/mL\n`);
+
+  console.log(`${risk.color} Risk Level: ${risk.level}`);
+  console.log(`📈 Trend: ${trend}\n`);
+
+  console.log('📉 Recent Changes:');
+  console.log(`   Weekly:  ${weeklyChange > 0 ? '+' : ''}${weeklyChange}%`);
+  console.log(`   Monthly: ${monthlyChange > 0 ? '+' : ''}${monthlyChange}%\n`);
+
+  console.log('📍 Previous Weeks:');
+  console.log(`   ${formatDate(oneWeekAgo.week_ending_date)}: ${oneWeekAgo.sars_cov2_log10_copies_ml}`);
+  console.log(`   ${formatDate(twoWeeksAgo.week_ending_date)}: ${twoWeeksAgo.sars_cov2_log10_copies_ml}`);
+  console.log(`   ${formatDate(fourWeeksAgo.week_ending_date)}: ${fourWeeksAgo.sars_cov2_log10_copies_ml}\n`);
+
+  console.log('ℹ️  Source: California Department of Public Health');
+  console.log('ℹ️  Region: California Statewide (Bay Area proxy)');
+  console.log('ℹ️  Leading indicator: ~4-7 days ahead of clinical data\n');
+  console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n');
+
+} catch (error) {
+  console.error('❌ Error reading COVID wastewater data:', error);
+  console.error('\nMake sure the dataset exists at:');
+  console.error(DATASET_PATH);
+  process.exit(1);
+}
