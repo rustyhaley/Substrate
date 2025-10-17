@@ -28,6 +28,35 @@
 
 ## About
 
+**Substrate** is an open-source framework for capturing, organizing, and analyzing different aspects of human civilization. It provides a structured knowledge system covering problems, solutions, plans, experiments, and empirical data—all interconnected and designed to be analyzed by both humans and AI systems.
+
+The project combines:
+- **Conceptual Components**: Problems, Solutions, Ideas, Plans, Values, Models, Arguments, Claims
+- **Empirical Data**: Curated ground-truth datasets from authoritative sources
+- **Organizational Elements**: People, Projects, Organizations, Funding Sources
+- **Outcome Tracking**: Results, Experiments, Metrics, Risks
+
+### Data Directory
+
+Substrate includes a **Data/** directory with authoritative, ground-truth datasets about important aspects of human life, society, and progress. All datasets come from verified, reputable sources and are provided in human-readable CSV and Markdown formats.
+
+**Current Datasets:**
+
+| Dataset | Coverage | Data Points | Source | Description |
+|---------|----------|-------------|--------|-------------|
+| **US-GDP** | 1929-2025 | 96 years (annual)<br>314 quarters | FRED/BEA | Real GDP (chained 2017 dollars) - primary measure of US economic activity |
+| **US-Inflation** | 1947-2025 | 945 months | FRED/BLS | Consumer Price Index (CPI-U) - gold standard inflation measure |
+| **Bay-Area-COVID-Wastewater** | 2022-2025 | 161 weeks | CDPH | California COVID-19 wastewater surveillance (leading health indicator) |
+| **Pulitzer-Prize-Winners** | 1918-2024 | 249 winners | Wikidata | Arts & Letters categories (Poetry, Drama, General/Special awards) |
+
+**Data Philosophy:**
+- **Ground Truth First**: Authoritative, verifiable sources only
+- **Human-Readable + Machine-Parseable**: CSV and Markdown formats
+- **Full Transparency**: Complete methodology documentation and source attribution
+- **Shared Knowledge**: Public domain or openly licensed data
+
+See `Data/README.md` for complete documentation of all datasets, data quality standards, and contribution guidelines.
+
 ## Introduction video
 
 Here's a video explaining the project and its structure.
