@@ -1,0 +1,207 @@
+# Values
+
+- **Values Exercise**
+  - Designed by Deborah Preuss
+    - **If working with a group: to engage the group, ask “what are values?” & ask for examples.**
+      - Remain silent while they think, give them some time. If it really bogs down, I might say:
+        - “We use values to make difficult decisions. For example: your spouse calls to say your small child has been taken to hospital with a broken bone and is afraid. Do you go to your very important meeting in half an hour? The decisions can be most difficult when they require that we balance important values that conflict, or seem to conflict.”
+    - **Each person gets a deck of about 100 shuffled value words.**
+      - All at once: each person quickly sorts them into three piles.
+        - “Go with your gut, do it fast. Only your own opinion matters.”
+          - !!! (heart) pile - no-compromise values, deal-breakers
+          - ! (speech bubble) pile - important values
+          - ? (thought bubble) pile - lesser or unimportant values.
+      - Remove the ? pile and set aside the ! pile for a later step.
+      - Find themes: Sort the contents of the !!! pile into smaller groupings, by theme.
+      - See a gap? Write missing value on a blank card.
+      - Scan your ! pile to see if you want to add some of those to your smaller piles.
+    - **Find creative theme names for each pile. There are different ways this happens:**
+      - You notice that one or two values in a pile represent the whole group
+      - Sometimes one value stands alone, becomes a group in itself
+      - Summarize. Ex: "love and be loved" or "be the best" or "keep moving"
+      - Use a metaphor word or phrase. Ex: Yoda; bread; a racecar; a magic wand ...
+      - Draw a graphic label. Ex: a seashell, a house, a river, a balloon, a family ...
+      - If there is time: expand each label into a personally significant sentence/phrase/image.
+      - Record your results (a list? a collage? a smartphone photo?) and put them to work:
+        - Put the image or list where you will see it every day for the next week.
+        - Notice your thoughts around values. Tell a friend what you are learning.
+    - **If working with a group: ask each person to contribute their top (3 or 5) value cards.**
+      - Ask “How do we want to be when we work together? What is most important to us as a group?”
+      - Work together to make a coherent Team Values list out of the items contributed, noting that groups operate differently than individuals - so add/remove values accordingly as you discuss.
+      - When all (really) agree, record these values and make them visible to all.
+      - Over time values naturally shift or get forgotten. Make a reminder or calendar entry to revisit this exercise a few weeks or months in the future. You might like to do it annually!
+    - **Values Exercise Template**
+      - ![Values Exercise Template](Images\Values_Exercise_Template.png)
+    - **Values Word List**
+      - ABUNDANCE
+      - ACHIEVEMENT / SUCCESS
+      - AUTHENTICITY
+      - AUTONOMY
+      - BEAUTY
+      - BELONGING
+      - CHALLENGE
+      - CHANGE / VARIETY
+      - COLLABORATION
+      - COMMITMENT
+      - COMMON GOOD
+      - COMMUNICATION
+      - COMMUNITY / FELLOWSHIP
+      - COMPETENCE
+      - COMPETITION
+      - CONNECTEDNESS
+      - CONTRIBUTION
+      - COOPERATION
+      - COURAGE
+      - CREATIVITY
+      - CURIOSITY
+      - DECISIVENESS
+      - DEPENDABILITY
+      - DISCIPLINE
+      - DIVERSITY
+      - EFFECTIVENESS
+      - EMERGENCE
+      - EMPATHY
+      - EQUALITY
+      - ETHICAL PRACTICE
+      - EXCELLENCE
+      - FAIRNESS
+      - FAMILY
+      - FEEDBACK
+      - FLEXIBILITY
+      - FLOW
+      - FOCUS
+      - FORGIVENESS
+      - FREEDOM
+      - FRIENDSHIP
+      - FUN
+      - GENEROSITY
+      - GRATITUDE
+      - GROWTH
+      - HAPPINESS
+      - HARMONY
+      - HEALTH
+      - HONESTY / INTEGRITY
+      - HOPE
+      - HUMOR
+      - INCLUSIVENESS
+      - INDEPENDENCE
+      - INFLUENCE
+      - INNOVATION
+      - INTELLIGENCE
+      - INTERDEPENDENCE
+      - JOY
+      - KINDNESS
+      - KNOWLEDGE
+      - LEARNING
+      - LOVE / AFFECTION
+      - LOYALTY
+      - MEANING / PURPOSE
+      - NATURE
+      - OPENNESS
+      - OPTIMISM
+      - PATIENCE
+      - PEACE / SERENITY
+      - PLEASURE
+      - POWER
+      - PRODUCTIVITY
+      - PROSPERITY / WEALTH
+      - QUALITY
+      - REALISM
+      - RECOGNITION
+      - RELATIONSHIP
+      - RELIABILITY
+      - REPUTATION
+      - RESPECT
+      - RISK TAKING
+      - SECURITY
+      - SELF-EXPRESSION
+      - SERVICE
+      - SIMPLICITY
+      - SOLUTION FOCUS
+      - SPIRITUALITY / FAITH
+      - STABILITY
+      - STRENGTH
+      - TEAMWORK
+      - TRUST
+      - TRUTH
+      - VALUE CREATION
+      - VULNERABILITY
+      - WISDOM
+  - Articles
+    - **Make Your Values Mean Something**
+      - by [Patrick M. Lencioni](https://hbr.org/search?term=patrick%20m.%20lencioni)
+      - A version of this article appeared in the [July 2002](https://hbr.org/archive-toc/BR0207) issue of **Harvard Business Review**.
+        - <https://hbr.org/archive-toc/BR0207>
+          - <https://archive.ph/zDEkF>
+      - **Introduction**
+        - Take a look at this list of corporate values: Communication. Respect. Integrity. Excellence. They sound pretty good, don’t they? Strong, concise, meaningful. Maybe they even resemble your own company’s values, the ones you spent so much time writing, debating, and revising. If so, you should be nervous. These are the corporate values of Enron, as stated in the company’s 2000 annual report. And as events have shown, they’re not meaningful; they’re meaningless.
+        - Enron, although an extreme case, is hardly the only company with a hollow set of values. I’ve spent the last ten years helping companies develop and refine their corporate values, and what I’ve seen isn’t pretty. Most values statements are bland, toothless, or just plain dishonest. And far from being harmless, as some executives assume, they’re often highly destructive. Empty values statements create cynical and dispirited employees, alienate customers, and undermine managerial credibility.
+        - Want proof? Here’s what happened at a recent management conference held by a financial services company. The CEO began by proudly announcing the important role that a new set of corporate values, teamwork, quality, and innovation, would play at the firm. He then showed the assembly, including dozens of top executives from around the world, a slick video that illustrated each word with stock footage of world-class athletes, swelling music, and shots of employees waving awkwardly at the camera. The whole effort reeked of insincerity. When the CEO cheerfully asked audience members if they wanted to watch it again, he was met by a loud chorus of “No!” It was painfully clear that his credibility was shot.
+        - Given the risk, why do executives put so much work into developing values statements in the first place? Because they believe they have to. At least that’s how they’ve felt since 1994, when Jim Collins and Jerry Porras published **Built to Last**. The book made the case that many of the best companies adhered to a set of principles called core values, provoking managers to stampede to off-site meetings in order to conjure up some core values of their own. The values fad swept through corporate America like chicken pox through a kindergarten class. Today, 80% of the **Fortune** 100 tout their values publicly, values that too often stand for nothing but a desire to be au courant or, worse still, politically correct.
+        - The debasement of values is a shame, not only because the resulting cynicism poisons the cultural well but also because it wastes a great opportunity. Values can set a company apart from the competition by clarifying its identity and serving as a rallying point for employees. But coming up with strong values, and sticking to them, requires real guts. Indeed, an organization considering a values initiative must first come to terms with the fact that, when properly practiced, values inflict pain. They make some employees feel like outcasts. They limit an organization’s strategic and operational freedom and constrain the behavior of its people. They leave executives open to heavy criticism for even minor violations. And they demand constant vigilance.
+        - **If you’re not willing to accept the pain real values incur, don’t bother going to the trouble of formulating a values statement.** You’ll be better off without one. But if you have the fortitude to see the effort through, you can learn some important lessons from the few companies that have adopted meaningful corporate values. Whether their values stemmed directly from the vision and character of their founders or were developed later through formal programs, these companies all followed four basic imperatives in creating and implementing their values.
+      - **Understand the Different Types of Values**
+        - I once asked the CEO of a **Fortune** 500 networking company to tell me one of his firm’s core values. “A sense of urgency!” he replied without hesitation. “So,” I asked, “your employees take quick action and hit all their deadlines?” “No,” he replied, “they’re complacent as hell, which is why we need to make urgency one of our core values.”
+        - That response reveals the confusion underlying many values initiatives. Far from being a core value, a sense of urgency didn’t even exist in the organization. It was just an aspiration, a goal for the future. Too often, executives mistake other kinds of values for core values. The resulting hodgepodge bewilders employees and makes management seem out of touch.
+        - Companies, therefore, should establish some basic definitions to ensure that people know what they’re talking about and what they’re trying to accomplish. I’ve found it helpful to organize values into four categories.
+          - ****Core values**** are the deeply ingrained principles that guide all of a company’s actions; they serve as its cultural cornerstones. Collins and Porras succinctly define core values as being inherent and sacrosanct; they can never be compromised, either for convenience or short-term economic gain. Core values often reflect the values of t he company’s founders, Hewlett-Packard’s celebrated “HP Way” is an example. They are the source of a company’s distinctiveness and must be maintained at all costs.
+          - ****Aspirational values**** are those that a company needs to succeed in the future but currently lacks. A company may need to develop a new value to support a new strategy, for example, or to meet the requirements of a changing market or industry. The CEO who claimed his company’s core value was a sense of urgency, for instance, was substituting an aspirational value for a core one.
+            - Aspirational values need to be carefully managed to ensure that they do not dilute the core. One company I worked with valued extremely hard work and dedication; its employees were known to work late into the evenings and on weekends. At some point, the executive team felt compelled to add “work-life balance” as an aspirational value, but they ultimately decided against it because doing so would confuse employees about what mattered most to the company.
+          - ****Permission-to-play values**** simply reflect the minimum behavioral and social standards required of any employee. They tend not to vary much across companies, particularly those working in the same region or industry, which means that, by definition, they never really help distinguish a company from its competitors.
+            - A CEO I worked with confused core values with permission-to-play values when he insisted that integrity was a core value of his company. When I asked why, he said, “Because we refuse to hire people who misrepresent themselves on their résumés or who provide inaccurate information about previous employment experience.” I pointed out that while his declaration was no doubt true, most organizations had similar policies. Unless his company was willing to adopt unusually tough measures to demonstrate that it held a higher standard of integrity than most companies, integrity should be classified as a permission-to-play value, not a core one.
+          - ****Accidental values**** arise spontaneously without being cultivated by leadership and take hold over time. They usually reflect the common interests or personalities of the organization’s employees. Accidental values can be good for a company, such as when they create an atmosphere of inclusivity. But they can also be negative forces, foreclosing new opportunities. Managers always need to distinguish core values from merely accidental ones, as confusion here can be disastrous.
+            - One fashion apparel company, the Sak Elliot Lucca, initially struggled to distinguish its accidental values from its core. Located in the edgy South of Market district of San Francisco, its early employees were single adults who partied on weeknights and owned a disproportionate amount of black clothing; accordingly, the company was accidentally imbued with the values of these employees, trendy, youthful, and cool.
+            - But as the company grew, two things became apparent to executives: There would be no way to adequately staff the company if only young, hip, “Sak-looking” people were hired. And older, married workers who could make great contributions might be inadvertently overlooked. So the company actively worked to help employees understand that hiring only trendy people had nothing to do with the Sak’s core values of trust (being honest and credible), action (making independent decisions), and ownership (treating the company as if one were a founder). Even “unhip” people should be recruited, as long as they shared the company’s cherished core values. Today the Sak is a truly diverse organization, and it has broadened its product line to appeal to a much wider market.
+      - **Be Aggressively Authentic**
+        - Many companies view a values initiative in the same way they view a marketing launch: a onetime event measured by the initial attention it receives, not the authenticity of its content. This can undermine the credibility of an organization’s leaders, as the CEO of the financial services company who showed an insincere video promptly discovered.
+        - Even executives who take values initiatives seriously can sabotage them by adopting blandly nice ideals that fail to differentiate their company from competitors. Consider the motherhood-and-apple-pie values that appear in so many companies’ values statements, integrity, teamwork, ethics, quality, customer satisfaction, and innovation. In fact, 55% of all **Fortune** 100 companies claim integrity is a core value, 49% espouse customer satisfaction, and 40% tout team-work. While these are inarguably good qualities, such terms hardly provide a distinct blueprint for employee behavior. Cookie-cutter values don’t set a company apart from competitors; they make it fade into the crowd.
+        - For a values statement to be authentic, it doesn’t have to sound like it belongs on a Hallmark card. Indeed, some of the most values-driven companies adhere to tough, if not downright controversial, values. Siebel Systems, for instance, adheres to a set of authentic values that flagrantly counter the culture of Silicon Valley, where the company is headquartered. Professionalism, which tops Siebel’s list of values, sets it apart from the frivolous cultures of many technology companies where pizza boxes, foosball tables, and sandals are de rigeur. Siebel’s employees are barred from eating at their desks or decorating their walls with more than one or two photographs. As unacceptable as this may seem within Silicon Valley’s playground-like corridors, it distinguishes Siebel from competitors and gives prospective and current employees a clear understanding that to succeed, they must act professionally at all times.
+        - Intel, likewise, takes pride in the pricklier aspects of its culture. Employees are pushed to embrace the value of risk taking by challenging the status quo and engaging in constructive confrontation. During orientation, for example, new employees are taught the art of verbal jousting without holding on to hard feelings. And founder Andy Grove is legendary for his willingness to challenge, even berate, executives during meetings. One of Grove’s former direct reports fondly recalls being chastised by the former CEO during a presentation. Just a few minutes into the executive’s talk, Grove interrupted him by saying, “If this isn’t going to get more interesting, you might want to stop right there and come back next week with a better story.”
+        - Aggressively adhering to one’s values can also help a company make strategic decisions. For example, Webcor Builders, a leading construction management firm in the San Francisco Bay area, used its core value of innovation as a strategic compass last year when it decided to purchase one of its vendors, a consulting firm that wired construction firms with high-bandwidth technology. The acquisition might have seemed foolish for a bricks-and-mortar company in the stodgy construction industry, but it worked. Thanks to Webcor’s new business, architects and engineers who formerly relied on telephones and unwieldy blueprints can now collaborate electronically, saving both time and money. According to CEO Andy Ball, the move was “motivated by our cultural commitment to innovation as much as it was by market opportunity.”
+      - **Own the Process**
+        - What’s the first thing many executives do after they decide to embark on a values initiative? They hand off the effort to the HR department, which uses the initiative as an excuse for an inclusive feel-good effort. To engage employees, HR rolls out employee surveys and holds lots of town meetings to gather input and build consensus.
+        - That’s precisely the wrong approach. **Values initiatives have nothing to do with building consensus, they’re about imposing a set of fundamental, strategically sound beliefs on a broad group of people.** Most executives understand the danger of consensus-driven decision-making when it comes to strategy, finance, and other business issues, yet they seem oblivious to the problem when it comes to developing values. Surveying all employees about what values they believe the company should adopt is a bad idea for two reasons. First, it integrates suggestions from many employees who probably don’t belong at the company in the first place. And second, it creates the false impression that all input is equally valuable.
+        - Consider what happened when a CEO of a technology company agreed to let the HR department spearhead a values campaign. When HR suggested, after many meetings and surveys, that collaboration should be one of the company’s core values, he agreed without much thought. But just a few weeks later, while chairing an open meeting with managers, he completely disavowed this value by saying, “I don’t really believe in teams; I believe that achievement occurs when individuals work independently.” It’s no wonder managers felt baffled and disappointed. As a senior executive who eventually left the organization explains: “The gap between what we were saying and what we were doing was just too great.”
+        - The best values efforts are driven by small teams that include the CEO, any founders who are still with the company, and a handful of key employees. Tony Wild, the CEO of pharmaceutical company MedPointe, wanted his business to have a unique culture, so he knew better than to make the values discussion a democratic process. Working with seven top managers, many of whom had helped launch the company, Wild focused on two core values: a can-do attitude and the tireless pursuit of results. The group chose those values based on an analysis of a few employees who personified qualities that executives most wanted to see adopted throughout MedPointe’s culture. As for those employees who can’t embrace or embody these values, Wild explains, “That’s okay. They might be a better fit at another company.”
+        - Top managers also need to understand that a good values program is like a fine wine; it’s never rushed. It is far more important for a values team to arrive at a statement that works than to reach a decision it may later regret. Executives should discuss values over a number of months; they should consider and reconsider how the standards will play out within their corridors.
+        - Allowing time for reflection proved helpful to an international pharmaceutical company that wanted to establish a common culture after a series of acquisitions. The executive team, impatient after just a few hours of discussion to select the company’s values and move on to other topics, nearly approved a list that included the word “transparent.” The CEO wisely tabled the proposal in order to let the team ruminate on it and review it with key employees. They discovered that the term held a very different connotation in Europe than it did in the United States. The team made an important modification, changing “transparent” to “collaborative”, with the result that the chosen values were much more compatible with the firm’s global culture.
+      - **Weave Core Values into Everything**
+        - So let’s say you’ve nailed down the right values. What now? If they’re going to really take hold in your organization, your core values need to be integrated into every employee-related process, hiring methods, performance management systems, criteria for promotions and rewards, and even dismissal policies. From the first interview to the last day of work, employees should be constantly reminded that core values form the basis for every decision the company makes.
+        - Comergent, a young e-business company, has successfully created a strong culture around dependability, dedication, and self-motivation by integrating these core values into every system that directly touches employees. Job candidates, from receptionists to vice presidents, are screened not only for their skills and experiences but also for their fit with the company’s values. During interviews, CEO Jean Kovacs and her staff ask frank questions about workload expectations and past accomplishments. To test their self-motivation and dedication, for example, Kovacs asks candidates to describe something they’ve accomplished that other people thought would be impossible. [[Values]][[Dependability]][[Dedication]][[Motivation]][[Skills]][[Experience]][[Questions]][[Expectation]][[Accomplish]][[zMotivation]]
+        - After employees arrive at Comergent, they are reminded again and again that the company’s values are more than just words. People are evaluated against the core values, and when it comes time to award stock, bonuses, and raises, Kovacs and her team again use the values statement as a metric. Even the decision to let someone go is driven by values. “I can work with someone who needs more coaching or training, but when it comes to our core values, I have to be intolerant,” Kovacs explains. “That’s what ensures the strength of our culture.” Indeed, companies with strong cultures like Comergent’s avoid having to fire many people. [[Coaching]]
+        - Another company that effectively weaves its values into its organizational fabric is Siebel. It’s impossible for a new employee to spend a week there without realizing that customer satisfaction is a core value. All the artwork on the walls comes from customers’ annual reports, and all the conference rooms are named after customers. Even bonuses and compensation packages are awarded on the basis of customer satisfaction surveys conducted by an outside auditor.
+        - After a company has embedded its values into its systems, it should promote those values at every turn. It’s been said that employees will not believe a message until they’ve heard it repeated by executives seven times. Given the cynicism surrounding values these days, executives would do well to repeat them every chance they get.
+        - Many companies publicize their values on T-shirts and coffee mugs, but the most effective mechanisms are far simpler and less expensive. Consider how Nordstrom, a well-known example of a values-driven organization, constantly reminds employees of its core value of customer service. During orientation, rather than receiving a detailed handbook describing how to deliver great service to customers, new employees are told elaborate stories recounting the lengths fellow employees have gone to in order to wow clientele. The story of the representative who took back a customer’s two-year-old blouse with no questions asked, told over and over, reinforces employees’ belief that they work for an extraordinary company. And during nonstore hours, managers read customer comments, both positive and negative, over the intercom so that employees can hear firsthand how they are doing.
+        - Another company that continually communicates its values, often in a way that verges on corny, is Wal-Mart. From company cheers to computer-based training, the retail giant constantly stresses its core values of excellence, customer service, and respect to employees. “I come from Europe, where we find things like cheers to be typical of American superficiality,” one management trainee told me. “But I must admit that the posters on the walls in the break room and the Sam Walton quotes that we read about are not silly at all.” That’s because management reinforces the core values with action. Historically, when employees have come up with new ways to provide excellent service to customers, for instance, they’ve been rewarded with cash and other forms of public recognition.
+        - Given all the hard work that goes into developing and implementing a solid values system, most companies would probably prefer not to bother. And indeed they shouldn’t, because poorly implemented values can poison a company’s culture.
+        - Make no mistake: Living by stated corporate values is difficult. After all, it’s much harder to be clear and unapologetic for what you stand for than to cave in to politically correct pressures. And for organizations trying to repair the damage caused by bad values programs, the work is even harder. But if you are willing to devote your time and energy to creating an authentic values statement, there’s a good chance that the resulting values will stand your company in far better stead than Enron’s did.
+    - **Values With Teeth: Create More Meaningful Values Statements**
+      - By gothamCulture
+        - **Guest article written by Levi Nieminen, Ph.D.**
+      - PUBLISHED AT [JULY 16, 2015 (https://gothamculture.com/2015/07/16/values-with-teeth-create-more-meaningful-values-statements/)
+        - <https://archive.ph/xvL97>
+      - **Introduction**
+        - A number of years back, Patrick Lencioni wrote, “Make your values mean something.” His Harvard Business Review article ([HBR](https://hbr.org/2002/07/make-your-values-mean-something)) is a must-read for any executives toying with the idea of creating values statements in their companies, particularly those who may be doing so lightly.
+        - For those of you who have charged past Lencioni’s warnings and, for good reason, are searching for the best ways to get it right, this brief article builds on that discussion to describe two tests that can help you to avoid creating a values set that is “bland, toothless, or just plain dishonest.”
+      - **TEST NUMBER 1: AVOID THE “FEEL-GOODS”**
+        - The first test is rooted in the idea that you really don’t need values, and certainly not values statements, to help you celebrate the wins, big or small, that come with success and good times. This is not to say that companies should not look for and try to replicate the sources of past success, but rather to suggest that soul-searching and introspection are perhaps better spent on the rainy days than the bright, sunny ones. Can you imagine what the phrase “searching for explanations” would mean to the champions as they are carried off the field in victory? I can’t.
+        - On the other hand, values can be very useful as a framework for understanding and explaining the tough situations we all face in organizations–**but only if they have adequately sharpened teeth**.
+        - Here is a simple test. Recall the three most challenging situations your organization [or team, etc.] has faced in the last few years and what the organization did in response to these situations. Now answer the following question:
+          - **Do the values help to make sense of what was done and why?**
+        - If the values ring hollow or irrelevant for the most challenging situations that are faced, it is hard to imagine how they will help people face down the next ones that are certainly coming. On the other hand, the identity of the organization can be galvanized when people see a response that is consistent with the articulated values. And they may not always like the decision (particularly if it disadvantages them personally), but they can understand and respect it.
+        - Although I do this work for a living, one of my favorite examples of values that pass Test number 1 has nothing to do with the workplace. The example was shared by a senior HR executive, who described the values she and her husband use to manage the toughest organization of all, a family with young children! Three core values are discussed again and again, whether over breakfast, at the playground, or on the way to and from school.
+          - 1. **Tell the truth**.
+          - 2. **Love your brother (she has two sons)**.
+          - 3. **Do your best**.
+        - When one brother punches the other, the million-dollar question is not far behind the initiation of a time-out: **What value did you break?** Response after pause and sullen look: **I wasn’t loving my brother**. When playing distracts the boys from eating at the dinner table… **I wasn’t trying my best…**
+        - The magic is in the simplicity but also in the universality. Almost every tough situation that plays out can be analyzed using those three simple rules that we must commit to above all else. And perhaps most importantly, they have teeth! In a moment where some reflection is needed, the rules are a useful way to understand what went wrong, why mom and dad responded the way they did, and what must be different next time. The boys may not always like it, but I’m confident they will grow to understand and respect it.
+      - **TEST NUMBER 2: LOOK AT THE “ILLOGICAL” SIDE**
+        - The second test is rooted in the idea that values are most helpful to an organization when there is either no clear logic or evidence base to guide the way ahead or when organizations purposefully deviate from the logic and evidence that does exist. These days, most organizations are running as far and as fast away from values-based decisions as they can. Big data and bigger analytics; let the numbers decide! But in management, we’re a long way from a complete robot-takeover ([NPR’s Planet Money](http://www.npr.org/sections/money/2015/05/21/408234543/will-your-job-be-done-by-a-machine)), and it is precisely in those moments where the information we need isn’t available, that our values show themselves. What do we do when we don’t know what to do? We fall back on what we believe to be true in absence of the facts. We fall back on our values.
+        - Here is a simple test. Recall the last three times when your organization [or team, etc.] made a decision “shooting from the hip,” that is, when you didn’t have the intel that you wanted. In each case, describe the decision that was made and how the decision was reached. Now answer the following question:
+          - **Do the values help you to explain or justify what was decided and why?**
+        - Akin to the most challenging situations, it is the most “illogical” decisions that will require the most explanation and understanding for people. And as access to solid data improves, the illogical will come to represent **more** of what sets organizations apart. If carefully conceived, values can communicate the “leanings” or “biases” that will shape the organization’s decisions when on the shakiest of grounds.
+        - An interesting example of a value that passes Test number 2 is Mark Cuban’s “zigzag theory,” which goes something like: **When other organizations zig, we zag**. As the owner of the Dallas Mavericks (and perhaps most widely known as the “Shark Tank” investor), Mark’s organization has built a reputation for looking at what the competition is doing and then taking steps in the opposite direction…
+          - “… when there is a rush for everyone to do the same thing, it becomes more difficult to do. Not easier. Harder. It also means that as other teams follow their lead, it creates opportunities for those who have followed a different path” ([Cuban via SI’s coverage of his blog](http://www.si.com/nba/point-forward/2013/08/04/mark-cuban-dallas-mavericks-tanking)).
+        - Sport, like business, is a fascinating arena to see how advances in knowledge over time continue to change the rules of competition. Some organizations will lead that charge and others will follow. But along the way, values can provide a meaningful set of guideposts to orient people to what the organization will be predisposed to do as the dust forever continues to settle–**but only if they have adequately sharpened teeth**.
+      - **VALUES WITH TEETH**
+        - As a consultant who works with executives to build values statements, programs, and the like, I too have struggled for ways to make these into higher-impact activities. I hope the readers of this article will take the ideas presented here, try them and add to them, and come up with their own simple tests for giving values the real teeth and meaning that they deserve in organizations.
